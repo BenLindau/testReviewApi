@@ -2,16 +2,17 @@ package com.test.reviewWebApi.Model;
 
 public class QaModel {
 	
-	private float questionDegree;
+	
+	private double questionDegree;
 	private String questionUnit;
-	private float answerDegree;
+	private double answerDegree;
 	private String answerUnit;
 	private boolean isCorrect;
 	
 	
-	public QaModel(float inputQ,
+	public QaModel(double inputQ,
 				String inputUnit, 
-				float answerQ, 
+				double answerQ, 
 				String answerUnit, 
 				boolean result) {
 		this.questionDegree = inputQ;
@@ -21,10 +22,10 @@ public class QaModel {
 		this.isCorrect = result;
 	}
 	
-	public float getQuestionDegree() {
+	public double getQuestionDegree() {
 		return questionDegree;
 	}
-	public void setQuestionDegree(float questionDegree) {
+	public void setQuestionDegree(double questionDegree) {
 		this.questionDegree = questionDegree;
 	}
 	public String getQuestionUnit() {
@@ -33,10 +34,10 @@ public class QaModel {
 	public void setQuestionUnit(String questionUnit) {
 		this.questionUnit = questionUnit;
 	}
-	public float getAnswerDegree() {
+	public double getAnswerDegree() {
 		return answerDegree;
 	}
-	public void setAnswerDegree(float answerDegree) {
+	public void setAnswerDegree(double answerDegree) {
 		this.answerDegree = answerDegree;
 	}
 	public String getAnswerUnit() {

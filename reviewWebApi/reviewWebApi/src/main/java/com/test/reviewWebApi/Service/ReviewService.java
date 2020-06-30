@@ -1,5 +1,7 @@
 package com.test.reviewWebApi.Service;
 
+import java.text.DecimalFormat;
+
 import org.springframework.stereotype.Service;
 
 import com.test.reviewWebApi.Model.QaModel;
@@ -8,11 +10,15 @@ import com.test.reviewWebApi.Model.QaModel;
 public class ReviewService {
 
 
+    DecimalFormat df1 = new DecimalFormat("0.#");
+
 	public void outputResults(String string) {
 		System.out.println(string);
 	}
 	
 	public QaModel reviewQuestion(QaModel qaModel) {
+		
+	
 		
 		if(qaModel.getQuestionUnit().trim().equalsIgnoreCase("fahrenheight")) {
 			evaluatefahrenheight(qaModel);
@@ -38,20 +44,21 @@ public class ReviewService {
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("celsius")) {
 			
-				float testTemp = ((float) (qaModel.getQuestionDegree()-32)*5)/9;
-				if(testTemp == (qaModel.getAnswerDegree())) {
+				double testTemp = ((double) (qaModel.getQuestionDegree()- 32.0) * (5.0/9.0));
+				System.out.print(df1.format(testTemp) + ":" + (df1.format(qaModel.getAnswerDegree())));
+				if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))){
 				qaModel.setCorrect(true);
 			}
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("kelvin")) {
-			float testTemp = (float) (273.5 + ((qaModel.getQuestionDegree() - 32.0) * (5.0/9.0)));
-			if(testTemp == qaModel.getAnswerDegree()) {
+			double testTemp = (double) (273.5 + ((qaModel.getQuestionDegree() - 32.0) * (5.0/9.0)));
+			if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))){
 			qaModel.setCorrect(true);
 			}
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("rankine")) {
-			float testTemp = (float) ((qaModel.getQuestionDegree()*1.0)+459.67);
-			if(testTemp == qaModel.getAnswerDegree()) {
+			double testTemp = (double) ((qaModel.getQuestionDegree()*1.0)+459.67);
+			if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 			qaModel.setCorrect(true);
 			}
 		}
@@ -60,25 +67,25 @@ public class ReviewService {
 	
 	public QaModel evaluateCelsius(QaModel qaModel) {
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("celsius")) {
-			if(qaModel.getQuestionDegree() == qaModel.getAnswerDegree()) {
+			if(df1.format(qaModel.getQuestionDegree()) == df1.format(qaModel.getAnswerDegree())) {
 				qaModel.setCorrect(true);
 			}
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("fahrenheight")) {
-				float testTemp = ((float) (qaModel.getQuestionDegree() * 1.8 + 32));
-				if(testTemp == qaModel.getAnswerDegree()) {
+				double testTemp = ((double) (qaModel.getQuestionDegree() * 1.8 + 32));
+				if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 					qaModel.setCorrect(true);
 			}
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("kelvin")) {
-			float testTemp = (float) (273.15 + ((qaModel.getQuestionDegree())));
-			if(testTemp == qaModel.getAnswerDegree()) {
+			double testTemp = (double) (273.15 + ((qaModel.getQuestionDegree())));
+			if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 				qaModel.setCorrect(true);
 			}
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("rankine")) {
-			float testTemp = (float) ((273.15 + qaModel.getQuestionDegree()) * 9/5);
-			if(testTemp == qaModel.getAnswerDegree()) {
+			double testTemp = (double) ((273.15 + qaModel.getQuestionDegree()) * 9/5);
+			if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 				qaModel.setCorrect(true);
 			}
 		}
@@ -87,25 +94,25 @@ public class ReviewService {
 
 	public QaModel evaluateKelvin(QaModel qaModel) {
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("kelvin")) {
-			if(qaModel.getQuestionDegree() == qaModel.getAnswerDegree()) {
+			if(df1.format(qaModel.getQuestionDegree()) == df1.format(qaModel.getAnswerDegree())) {
 				qaModel.setCorrect(true);
 			}
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("fahrenheight")) {
-				float testTemp = ((float) (((qaModel.getQuestionDegree() - 273) * 9/5) + 32));
-				if(testTemp == qaModel.getAnswerDegree()) {
+				double testTemp = ((double) (((qaModel.getQuestionDegree() - 273) * 9/5) + 32));
+				if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 					qaModel.setCorrect(true);
 			}
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("celsius")) {
-			float testTemp = (float) (qaModel.getQuestionDegree() - 273.15);
-			if(testTemp == qaModel.getAnswerDegree()) {
+			double testTemp = (double) (qaModel.getQuestionDegree() - 273.15);
+			if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 				qaModel.setCorrect(true);
 			}
 		}
 		if(qaModel.getAnswerUnit().equalsIgnoreCase("rankine")) {
-			float testTemp = (float) (qaModel.getQuestionDegree() * 9/5);
-			if (testTemp == qaModel.getAnswerDegree()) {
+			double testTemp = (double) (qaModel.getQuestionDegree() * 9/5);
+			if (df1.format(testTemp) == (df1.format(qaModel.getAnswerDegree()))) {
 				qaModel.setCorrect(true);
 				}
 			}
@@ -115,26 +122,26 @@ public class ReviewService {
 		
 		public QaModel evaluateRankine(QaModel qaModel) {
 			if(qaModel.getAnswerUnit().equalsIgnoreCase("rankine")) {
-				if(qaModel.getQuestionDegree() == qaModel.getAnswerDegree()) {
+				if(df1.format(qaModel.getQuestionDegree()) == df1.format(qaModel.getAnswerDegree())) {
 					qaModel.setCorrect(true);
 				}
 			}
 			if(qaModel.getAnswerUnit().equalsIgnoreCase("fahrenheight")) {
 				
-					float testTemp = ((float) (qaModel.getQuestionDegree() - 459.67));
-					if(testTemp == qaModel.getAnswerDegree()) {
+					double testTemp = ((double) (qaModel.getQuestionDegree() - 459.67));
+					if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 					qaModel.setCorrect(true);
 				}
 			}
 			if(qaModel.getAnswerUnit().equalsIgnoreCase("celsius")) {
-				float testTemp = (float) ((qaModel.getQuestionDegree() - 491.67) * 5/9);
-				if(testTemp == qaModel.getAnswerDegree()) {
+				double testTemp = (double) ((qaModel.getQuestionDegree() - 491.67) * 5/9);
+				if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 				qaModel.setCorrect(true);
 				}
 			}
 			if(qaModel.getAnswerUnit().equalsIgnoreCase("kelvin")) {
-				float testTemp = (float) (qaModel.getQuestionDegree() * 5/9);
-				if(testTemp == qaModel.getAnswerDegree()) {
+				double testTemp = (double) (qaModel.getQuestionDegree() * 5/9);
+				if(df1.format(testTemp).equals((df1.format(qaModel.getAnswerDegree())))) {
 				qaModel.setCorrect(true);
 				}
 			}

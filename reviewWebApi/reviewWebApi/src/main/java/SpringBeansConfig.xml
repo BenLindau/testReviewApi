@@ -6,9 +6,13 @@
 	<bean id="reviewService"
  		class="com.test.reviewWebApi.service.ReviewService">
  		</bean>
- 	
+
+ 	<bean id="qaModelDao"
+ 		class="com.test.reviewWebApi.Dao.QaModelDao">
+ 		</bean>
+ 		 	
  	<bean id="qaModel"
  		class="com.test.reviewWebApi.model.QaModel">
  		</bean>
- 
+
  </beans>
